@@ -5,34 +5,10 @@ Parameters:
   SiteBucketName:
     Type: String
     Description: Name of bucket to create to host the website
-  GitHubUser:
-    Type: String
-    Description: GitHub User
-    Default: "stelligent"
-  GitHubRepo:
-    Type: String
-    Description: GitHub Repo to pull from. Only the Name. not the URL
-    Default: "devops-essentials"
-  GitHubBranch:
-    Type: String
-    Description: GitHub Branch
-    Default: "master"
   GitHubToken:
     NoEcho: true
     Type: String
     Description: Secret. It might look something like 9b189a1654643522561f7b3ebd44a1531a4287af OAuthToken with access to Repo. Go to https://github.com/settings/tokens
-  BuildType:
-    Type: String
-    Default: "LINUX_CONTAINER"
-    Description: The build container type to use for building the app
-  BuildComputeType:
-    Type: String
-    Default: "BUILD_GENERAL1_SMALL"
-    Description: The build compute type to use for building the app
-  BuildImage:
-    Type: String
-    Default: "aws/codebuild/ubuntu-base:14.04"
-    Description: The build image to use for building the app
 Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
@@ -44,32 +20,11 @@ Metadata:
           default: "GitHub Configuration"
         Parameters:
           - GitHubToken
-          - GitHubUser
-          - GitHubRepo
-          - GitHubBranch
-      - Label:
-          default: "Build Configuration"
-        Parameters:
-          - BuildType
-          - BuildComputeType
-          - BuildImage
     ParameterLabels:
       SiteBucketName:
         default: Name of S3 Bucket to create for website hosting
       GitHubToken:
         default: GitHub OAuth2 Token
-      GitHubUser: 
-        default: GitHub User/Org Name
-      GitHubRepo: 
-        default: GitHub Repository Name
-      GitHubBranch: 
-        default: GitHub Branch Name
-      BuildType: 
-        default: CodeBuild type
-      BuildComputeType: 
-        default: CodeBuild instance type
-      BuildImage: 
-        default: CodeBuild image
 Resources:
   CodeBuildRole:
     Type: AWS::IAM::Role
@@ -150,9 +105,9 @@ Resources:
       Artifacts:
         Type: CODEPIPELINE
       Environment:
-        Type: !Ref BuildType
-        ComputeType: !Ref BuildComputeType
-        Image: !Sub ${BuildImage}
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/nodejs:6.3.1
       Source:
         Type: CODEPIPELINE
         BuildSpec: !Sub |
@@ -164,7 +119,7 @@ Resources:
           artifacts:
             type: zip
             files:
-              - ./index.html
+              - ./fe/app/index.html
       TimeoutInMinutes: 10
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
@@ -183,9 +138,9 @@ Resources:
           OutputArtifacts:
           - Name: SourceOutput
           Configuration:
-            Owner: !Ref GitHubUser
-            Repo: !Ref GitHubRepo
-            Branch: !Ref GitHubBranch
+            Owner: 'Matusko'
+            Repo: 'mhd'
+            Branch: 'master'
             OAuthToken: !Ref GitHubToken
           RunOrder: 1
       - Name: Deploy
