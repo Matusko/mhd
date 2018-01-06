@@ -8,7 +8,7 @@ Parameters:
   GitHubOAuthToken:
       Description: GitHubOAuthToken
       Type: String
-
+      NoEcho: true
 Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:

@@ -4,7 +4,8 @@
   "description": "mhd app backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,9 @@
   "homepage": "https://m0dlq29vra.execute-api.eu-west-1.amazonaws.com/Stage/TimeResource",
   "dependencies": {
     "aws-sdk": "^2.177.0"
+  },
+  "devDependencies": {
+    "typescript": "^2.6.2",
+    "@types/node": "^8.0.2"
   }
 }
