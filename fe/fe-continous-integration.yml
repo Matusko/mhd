@@ -110,7 +110,16 @@ Resources:
         Image: aws/codebuild/nodejs:7.0.0
       Source:
         Type: CODEPIPELINE
-        BuildSpec: "fe/buildspec.yml"
+        BuildSpec: !Sub |
+          version: 0.1
+          phases:
+            post_build:
+              commands:
+                - aws s3 cp --recursive --acl public-read ./ s3://${SiteBucketName}/
+          artifacts:
+            type: zip
+            files:
+              - ./fe/app/index.html
       TimeoutInMinutes: 10
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
