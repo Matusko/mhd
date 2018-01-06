@@ -3,14 +3,14 @@ phases:
   install:
     commands:
       - echo run npm install
-      - npm --prefix ./fe/app/mhd-angular install
+      - npm --prefix ./fe/mhd-angular install
   build:
     commands:
       - echo run Prod AoT build
-      - npm --prefix ./fe/app/mhd-angular run build
+      - npm --prefix ./fe/mhd-angular run build
   post_build:
     commands:
-      - aws s3 cp --recursive --acl public-read ./fe/app/mhd-angular/dist s3://cukan-bartko-mhd/
+      - aws s3 cp --recursive --acl public-read ./fe/mhd-angular/dist s3://cukan-bartko-mhd/
 artifacts:
   type: zip
   files:
