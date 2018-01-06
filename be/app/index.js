@@ -4,7 +4,8 @@ const AWS = require('aws-sdk');
 
 exports.handler = (event, context, callback) => {
     console.log("teest");
-    console.log(AWS);
+
+    AWS.config.update({region: 'eu-west-1'});
 
     let ddb = new AWS.DynamoDB({apiVersion: '2012-10-08'}); //TODO wat is this 2012-10-08
 
@@ -21,7 +22,7 @@ exports.handler = (event, context, callback) => {
     ddb.getItem(params, function(err, data) {
         if (err) {
             console.log("Error", err);
-            callback({
+            callback(null, {
                 statusCode: '500',
                 body: JSON.stringify(err)
             });
