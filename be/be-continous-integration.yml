@@ -153,6 +153,7 @@ Resources:
                   - 'apigateway:DELETE'
                   - 'apigateway:PATCH'
                   - 'apigateway:GET'
+                  - 'dynamodb:*'
                 Effect: Allow
                 Resource: '*'
 
