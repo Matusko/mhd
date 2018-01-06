@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Outputs the time
 Resources:
-  TimeFunction:
+  ScheduleFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
@@ -12,5 +12,18 @@ Resources:
         MyTimeApi:
           Type: Api
           Properties:
-            Path: /TimeResource
+            Path: /ScheduleResource
             Method: GET
+  ScheduleTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: firstName
+          AttributeType: S
+      KeySchema:
+        - AttributeName: firstName
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: ${self:provider.environment.DYNAMODB_TABLE}
