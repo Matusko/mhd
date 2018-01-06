@@ -1,9 +1,19 @@
 version: 0.1
 phases:
+  install:
+    commands:
+      - echo run npm install
+      - npm --prefix ./fe/app/mhd-angular install
+  build:
+    commands:
+      - echo run Prod AoT build
+      - npm --prefix ./fe/app/mhd-angular run build
   post_build:
     commands:
-      - aws s3 cp --recursive --acl public-read ./fe/app s3://cukan-bartko-mhd/
+      - aws s3 cp --recursive --acl public-read ./fe/app/mhd-angular/dist s3://cukan-bartko-mhd/
 artifacts:
   type: zip
   files:
-    - ./fe/app/index.html
+      - '**/*'
+  discard-paths: yes
+  base-directory: dist
