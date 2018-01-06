@@ -107,19 +107,10 @@ Resources:
       Environment:
         Type: LINUX_CONTAINER
         ComputeType: BUILD_GENERAL1_SMALL
-        Image: aws/codebuild/nodejs:6.3.1
+        Image: aws/codebuild/nodejs:7.0.0
       Source:
         Type: CODEPIPELINE
-        BuildSpec: !Sub |
-          version: 0.1
-          phases:
-            post_build:
-              commands:
-                - aws s3 cp --recursive --acl public-read ./ s3://${SiteBucketName}/
-          artifacts:
-            type: zip
-            files:
-              - ./fe/app/index.html
+        BuildSpec: "fe/buildspec.yml"
       TimeoutInMinutes: 10
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
