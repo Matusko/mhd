@@ -11,19 +11,26 @@ exports.handler = (event, context, callback) => {
     let params = {
         TableName: 'schedule',
         Key: {
-            'firstName' : "first item",
+            'firstName' : {
+                "S": "first item"
+            },
         }
+    };
+
+    let resp = {
+        statusCode: '500',
+        body: "this is weird"
     };
 
     ddb.getItem(params, function(err, data) {
         if (err) {
             console.log("Error", err);
-            let resp = {
-                statusCode: '500',
-                body: 'error '
+            resp = {
+                statusCode: '400',
+                body: err
             };
         } else {
-            let resp = {
+            resp = {
                 statusCode: '200',
                 body: data.Item
             };
