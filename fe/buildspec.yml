@@ -16,4 +16,4 @@ artifacts:
   files:
       - '**/*'
   discard-paths: yes
-  base-directory: dist
+  base-directory: ./fe/mhd-angular/dist
