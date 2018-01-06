@@ -6,4 +6,4 @@ phases:
 artifacts:
   type: zip
   files:
-    - ./app/index.html
+    - ./fe/app/index.html
