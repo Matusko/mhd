@@ -17,26 +17,21 @@ exports.handler = (event, context, callback) => {
         }
     };
 
-    let resp = {
-        statusCode: '500',
-        body: "this is weird"
-    };
 
     ddb.getItem(params, function(err, data) {
         if (err) {
             console.log("Error", err);
-            resp = {
-                statusCode: '400',
+            callback(null, {
+                statusCode: '500',
                 body: err
-            };
+            });
         } else {
-            resp = {
+            console.log("Success", data.Item);
+            callback(null, {
                 statusCode: '200',
                 body: data.Item
-            };
-            console.log("Success", data.Item);
+            });
         }
     });
 
-    callback(null, resp);
 };
