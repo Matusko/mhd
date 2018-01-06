@@ -2,7 +2,7 @@ version: 0.1
 phases:
   post_build:
     commands:
-      - aws s3 cp --recursive --acl public-read ./ s3://${SiteBucketName}/
+      - aws s3 cp --recursive --acl public-read ./ s3://cukan-bartko-mhd/
 artifacts:
   type: zip
   files:
