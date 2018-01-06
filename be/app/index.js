@@ -21,15 +21,15 @@ exports.handler = (event, context, callback) => {
     ddb.getItem(params, function(err, data) {
         if (err) {
             console.log("Error", err);
-            callback(null, {
+            callback({
                 statusCode: '500',
-                body: err
+                body: JSON.stringify(err)
             });
         } else {
             console.log("Success", data.Item);
             callback(null, {
                 statusCode: '200',
-                body: data.Item
+                body: JSON.stringify(data.Item)
             });
         }
     });
