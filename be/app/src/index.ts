@@ -9,7 +9,7 @@ import {
 
 export let handler = (event: any, context: any, callback: any) => {
 
-    AWS.config.update({region: 'eu-west-1'});
+    AWS.config.update({region: 'eu-west-1'}); // TODO could this be configurable or inherited during cloud formation procesing
 
     let ddb = new AWS.DynamoDB({apiVersion: '2012-10-08'}); //TODO wat is this 2012-10-08
 
