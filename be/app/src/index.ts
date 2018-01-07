@@ -1,4 +1,10 @@
 import AWS = require('aws-sdk');
+import {
+    graphql,
+    GraphQLSchema,
+    GraphQLObjectType,
+    GraphQLString, GraphQLNonNull
+} from 'graphql';
 
 
 export let handler = (event: any, context: any, callback: any) => {
@@ -6,6 +12,31 @@ export let handler = (event: any, context: any, callback: any) => {
     AWS.config.update({region: 'eu-west-1'});
 
     let ddb = new AWS.DynamoDB({apiVersion: '2012-10-08'}); //TODO wat is this 2012-10-08
+
+    const getGreeting = (firstName: any) => `Hello, ${firstName}.`;
+
+    const schema = new GraphQLSchema({
+        query: new GraphQLObjectType({
+            name: 'RootQueryType', // an arbitrary name
+            fields: {
+                // the query has a field called 'greeting'
+                greeting: {
+                    // we need to know the user's name to greet them
+                    args: { firstName: { name: 'firstName', type: new GraphQLNonNull(GraphQLString) } },
+                    // the greeting message is a string
+                    type: GraphQLString,
+                    // resolve to a greeting message
+                    resolve: (parent, args) => getGreeting(args.firstName)
+                }
+            }
+        }),
+    });
+
+    graphql(schema, event.queryStringParameters.query)
+        .then(
+            result => console.log(result),
+            err => console.log(err)
+        );
 
     if (event.queryStringParameters && event.queryStringParameters.firstName) {
         let params = {

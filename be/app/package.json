@@ -18,10 +18,12 @@
   },
   "homepage": "https://m0dlq29vra.execute-api.eu-west-1.amazonaws.com/Stage/TimeResource",
   "dependencies": {
-    "aws-sdk": "^2.177.0"
+    "aws-sdk": "^2.177.0",
+    "graphql": "^0.12.3"
   },
   "devDependencies": {
-    "typescript": "^2.6.2",
-    "@types/node": "^8.0.2"
+    "@types/graphql": "^0.11.7",
+    "@types/node": "^8.0.2",
+    "typescript": "^2.6.2"
   }
 }
