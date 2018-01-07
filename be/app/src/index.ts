@@ -7,7 +7,7 @@ export let handler = (event: any, context: any, callback: any) => {
 
     let ddb = new AWS.DynamoDB({apiVersion: '2012-10-08'}); //TODO wat is this 2012-10-08
 
-    if (event.queryStringParameters.firstName) {
+    if (event.queryStringParameters && event.queryStringParameters.firstName) {
         let params = {
             TableName: 'schedule',
             Key: {
