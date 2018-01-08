@@ -6,17 +6,29 @@ import {
     GraphQLString, GraphQLNonNull
 } from 'graphql';
 import {GetStopFromDbService} from "./db-layer/get-stop-from-db.service";
+import {FilterNextArrivalsService} from "./filter-next-arrivals.service";
+import {NextBus} from "../models/next-bus.model";
 /**
  * Created by matus on 8.1.2018.
  */
 
 export class GetStopService {
 
-    static getStop(query: string, successClb: (stopObj: Stop | null) => void, errorClb: (err: any) => void): void {
+    static getStop(query: string, successClb: (buses: NextBus[] | null) => void, errorClb: (err: any) => void): void {
+
+        const getFromDbSuccessClb = (stopObj: Stop | null): void => {
+
+            console.log("aaaaaaa");
+            let nbs = FilterNextArrivalsService.filter(stopObj);
+            console.log(nbs);
+
+            successClb(nbs);
+
+        };
 
         const getStop = (stopName: string) => {
 
-            GetStopFromDbService.getStop(stopName, successClb, errorClb);
+            GetStopFromDbService.getStop(stopName, getFromDbSuccessClb, errorClb);
 
         };
 
@@ -24,13 +36,9 @@ export class GetStopService {
             query: new GraphQLObjectType({
                 name: 'StopsQuery',
                 fields: {
-                    // the query has a field called 'greeting'
                     getStopInfo: {
-                        // we need to know the user's name to greet them
                         args: { stopName: { name: 'stopName', type: new GraphQLNonNull(GraphQLString) } },
-                        // the greeting message is a string
                         type: GraphQLString,
-                        // resolve to a greeting message
                         resolve: (parent, args) => getStop(args.stopName)
                     }
                 }

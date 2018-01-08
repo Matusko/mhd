@@ -2,13 +2,14 @@ import {LambdaCallbackFcn} from "./types/LambdaCallbackFcn";
 import {GetStopService} from "./service/get-stop.service";
 import {Stop} from "./models/stop.type";
 import {HttpResponseUtil} from "./util/http-response.util";
+import {NextBus} from "./models/next-bus.model";
 
 
 export let handler = (event: any, context: any, callback: LambdaCallbackFcn) => {
 
-    const succClb = (stopObj: Stop | null ): void => {
-        if (stopObj) {
-            callback(null, HttpResponseUtil.getSuccessResp(stopObj));
+    const succClb = (buses: NextBus[] | null ): void => {
+        if (buses) {
+            callback(null, HttpResponseUtil.getSuccessResp(buses));
         } else {
             callback(null, HttpResponseUtil.getNotFoundResp());
         }
