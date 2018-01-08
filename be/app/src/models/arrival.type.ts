@@ -1,7 +1,9 @@
 import {Info} from "./info.type";
+import * as moment from 'moment';
+import Moment = moment.Moment;
 
 export interface Arrival {
-    time: Date;
+    time: Moment;
     metaData: Info[];
 
 }

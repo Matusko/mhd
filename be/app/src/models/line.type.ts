@@ -5,6 +5,7 @@ import {Arrival} from "./arrival.type";
 
 export interface Line {
     lineNumber: number;
+    direction: string;
     normalDayArrivals: Arrival[];
     weekendArrivals: Arrival[];
     holidayArrivals: Arrival[];
