@@ -37,7 +37,7 @@ export class StopAssembler {
     static assembleArrivalFromDb(arrivalObj: any): Arrival {
         return  {
             time: moment(arrivalObj.time.S, 'HH:mmZ '),
-            metaData: StopAssembler.assembleInfosFromDb(arrivalObj.metaData.L)
+            metaData: arrivalObj.metaData ? StopAssembler.assembleInfosFromDb(arrivalObj.metaData.L) : undefined
         }
     }
 

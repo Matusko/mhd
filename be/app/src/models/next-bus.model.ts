@@ -8,6 +8,6 @@ import {Info} from "./info.type";
 export interface NextBus {
     line: number;
     time: Moment;
-    metaData: Info[];
+    metaData?: Info[];
 
 }

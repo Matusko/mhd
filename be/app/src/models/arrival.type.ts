@@ -4,6 +4,6 @@ import Moment = moment.Moment;
 
 export interface Arrival {
     time: Moment;
-    metaData: Info[];
+    metaData?: Info[];
 
 }
