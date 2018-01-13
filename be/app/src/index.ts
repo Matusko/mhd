@@ -20,8 +20,11 @@ export let handler = (event: any, context: any, callback: LambdaCallbackFcn) => 
         callback(null, HttpResponseUtil.getErrorResp(err));
     };
 
-    if (event.queryStringParameters && event.queryStringParameters.query) {
-        GetStopService.getStop(event.queryStringParameters.query, succClb, errClb);
+    if (event.queryStringParameters && event.queryStringParameters.stop) {
+
+        let query = '{getStopInfo(stopName:"' + event.queryStringParameters.stop + '")}';
+
+        GetStopService.getStop(query, succClb, errClb);
     }
 
 };
