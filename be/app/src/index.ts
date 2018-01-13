@@ -7,6 +7,8 @@ import {NextBus} from "./models/next-bus.model";
 
 export let handler = (event: any, context: any, callback: LambdaCallbackFcn) => {
 
+    console.log("handler invoked event: " + event + " and context: " + context);
+
     const succClb = (buses: NextBus[] | null ): void => {
         if (buses) {
             callback(null, HttpResponseUtil.getSuccessResp(buses));
