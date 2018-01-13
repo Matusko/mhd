@@ -18,9 +18,7 @@ export class GetStopService {
 
         const getFromDbSuccessClb = (stopObj: Stop | null): void => {
 
-            console.log("aaaaaaa");
             let nbs = FilterNextArrivalsService.filter(stopObj);
-            console.log(nbs);
 
             successClb(nbs);
 
