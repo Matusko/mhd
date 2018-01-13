@@ -13,7 +13,7 @@ Resources:
           Type: Api
           Properties:
             Path: /ScheduleResource
-            Method: GET
+            Method: POST
       Policies:
          Statement:
            - Effect: Allow

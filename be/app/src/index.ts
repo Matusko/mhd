@@ -1,6 +1,5 @@
 import {LambdaCallbackFcn} from "./types/LambdaCallbackFcn";
 import {GetStopService} from "./service/get-stop.service";
-import {Stop} from "./models/stop.type";
 import {HttpResponseUtil} from "./util/http-response.util";
 import {NextBus} from "./models/next-bus.model";
 
