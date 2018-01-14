@@ -10,7 +10,7 @@ import {NextBus} from "./models/next-bus.model";
 import {NextBusItemComponent} from "./next-bus-item/next-bus-item.component";
 import {Observable} from 'rxjs/Rx';
 import {DisplayableNextBus} from "./models/displayable-next-bus.model";
-import moment = require("moment");
+import * as moment from "moment";
 import {NextBusTimePipe} from "./next-bus-item/next-bus-time.pipe";
 import {NextBusRemainingTimePipe} from "./next-bus-item/next-bus-remaining-time.pipe";
 

@@ -6,8 +6,7 @@ import 'rxjs/add/operator/map'
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {NextBus} from "./models/next-bus.model";
-import moment = require("moment");
+import {NextBus} from "./models/next-bus.model";;
 
 @Injectable()
 export class NextBusesService {

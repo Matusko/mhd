@@ -1,6 +1,6 @@
 import {PipeTransform, Pipe} from "@angular/core";
 import Moment = moment.Moment;
-import moment = require("moment");
+import * as moment from "moment";
 /**
  * Created by matus on 14.1.2018.
  */
