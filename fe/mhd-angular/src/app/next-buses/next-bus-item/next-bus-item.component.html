@@ -1,7 +1,7 @@
 <div class="bus-item">
-  <h2>{{nextBus.line}}</h2>
-  <h5>{{nextBus.time}}</h5>
-  <h5>{{nextBus.remainingTime}}</h5>
+  <h2>Linka č. {{nextBus.line}}</h2>
+  <h5>Čas odjazdu: {{nextBus.time | nextBusTime}}</h5>
+  <h5>Ostáva {{nextBus.remainingTime | nextBusRemainingTime}}</h5>
 </div>
 
 

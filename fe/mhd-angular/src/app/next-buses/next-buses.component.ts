@@ -11,6 +11,8 @@ import {NextBusItemComponent} from "./next-bus-item/next-bus-item.component";
 import {Observable} from 'rxjs/Rx';
 import {DisplayableNextBus} from "./models/displayable-next-bus.model";
 import moment = require("moment");
+import {NextBusTimePipe} from "./next-bus-item/next-bus-time.pipe";
+import {NextBusRemainingTimePipe} from "./next-bus-item/next-bus-remaining-time.pipe";
 
 @Component({
   selector: 'next-buses',
@@ -29,7 +31,6 @@ export class NextBusesComponent {
       data => {
         this.buses = data;
         this.checkTime();
-        console.log(data)
       },
       err => {
         console.log(err)
@@ -46,6 +47,8 @@ export class NextBusesComponent {
   getDisplayableBuses(): void {
 
     let now = moment();
+
+    this.buses = this.buses.filter(bus => moment(bus.time).diff(now) >= 0);
 
     this.displayableBuses = this.buses.map(bus => {
 
@@ -67,7 +70,9 @@ export class NextBusesComponent {
 @NgModule({
   declarations: [
     NextBusesComponent,
-    NextBusItemComponent
+    NextBusItemComponent,
+    NextBusTimePipe,
+    NextBusRemainingTimePipe
   ],
   imports: [
     HttpClientModule,
