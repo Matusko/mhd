@@ -1,0 +1,7 @@
+<p-dataScroller [value]="displayableBuses" [lazy]="true">
+  <ng-template let-bus pTemplate="item">
+
+      <next-bus-item [nextBus]="bus"></next-bus-item>
+
+  </ng-template>
+</p-dataScroller>
