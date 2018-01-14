@@ -7,7 +7,7 @@ import {NextBusesService} from "./next-buses.service";
 import {HttpClientModule} from "@angular/common/http";
 import {DataScrollerModule} from 'primeng/primeng';
 import {NextBus} from "./models/next-bus.model";
-import {NextBusItemComponent} from "./next-bus-item/next-bus-item.component";
+import {NextBusItemComponent, NextBusesItemModule} from "./next-bus-item/next-bus-item.component";
 import {Observable} from 'rxjs/Rx';
 import {DisplayableNextBus} from "./models/displayable-next-bus.model";
 import * as moment from "moment";
@@ -70,12 +70,10 @@ export class NextBusesComponent {
 @NgModule({
   declarations: [
     NextBusesComponent,
-    NextBusItemComponent,
-    NextBusTimePipe,
-    NextBusRemainingTimePipe
   ],
   imports: [
     HttpClientModule,
+    NextBusesItemModule,
     DataScrollerModule
   ],
   exports: [
