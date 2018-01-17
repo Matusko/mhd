@@ -9,7 +9,7 @@ export class HttpResponseUtil {
     //TODO exact domains should not be in code
     //TODO is this right place for cors?
     static readonly headers: any = {
-        "Access-Control-Allow-Origin": "cukan-bartko-mhd.s3-website-eu-west-1.amazonaws.com"
+        "Access-Control-Allow-Origin": "http://cukan-bartko-mhd.s3-website-eu-west-1.amazonaws.com"
     };
 
     static getSuccessResp(obj: any): Response {
