@@ -4,10 +4,12 @@
 
 export class Response {
     statusCode: string;
+    headers: any;
     body: string;
 
-    constructor(statusCode: string, body: any) {
+    constructor(statusCode: string, headers: any, body: any) {
         this.statusCode = statusCode;
+        this.headers = headers;
         this.body = JSON.stringify(body);
     }
 
