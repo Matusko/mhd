@@ -7,20 +7,16 @@ import {NextBusesService} from "./next-buses.service";
 import {HttpClientModule} from "@angular/common/http";
 import {DataScrollerModule} from 'primeng/primeng';
 import {NextBus} from "./models/next-bus.model";
-import {NextBusItemComponent, NextBusesItemModule} from "./next-bus-item/next-bus-item.component";
+import {NextBusesItemModule} from "./next-bus-item/next-bus-item.component";
 import {Observable} from 'rxjs/Rx';
 import {DisplayableNextBus} from "./models/displayable-next-bus.model";
 import * as moment from "moment";
-import {NextBusTimePipe} from "./next-bus-item/next-bus-time.pipe";
-import {NextBusRemainingTimePipe} from "./next-bus-item/next-bus-remaining-time.pipe";
 
 @Component({
   selector: 'next-buses',
   templateUrl: './next-buses.component.html',
   styleUrls: ['next-buses.component.scss'],
-  providers: [
-    NextBusesService
-  ]
+  providers: [NextBusesService]
 })
 export class NextBusesComponent {
   buses: NextBus[] = [];
