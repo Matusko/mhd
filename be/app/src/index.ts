@@ -12,14 +12,14 @@ export let handler = (event: any, context: any, callback: LambdaCallbackFcn) => 
 
     const succClb = (buses: NextBus[] | null ): void => {
         if (buses) {
-            callback(null, HttpResponseUtil.getSuccessResp(buses));
+            callback(null, HttpResponseUtil.getSuccessResp(buses, event.headers));
         } else {
-            callback(null, HttpResponseUtil.getNotFoundResp());
+            callback(null, HttpResponseUtil.getNotFoundResp(event.headers));
         }
     };
 
     const errClb = (err: any): void => {
-        callback(null, HttpResponseUtil.getErrorResp(err));
+        callback(null, HttpResponseUtil.getErrorResp(err, event.headers));
     };
 
     if (event.queryStringParameters && event.queryStringParameters.stop) {
