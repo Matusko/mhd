@@ -19,8 +19,10 @@
   },
   "homepage": "https://m0dlq29vra.execute-api.eu-west-1.amazonaws.com/Stage/TimeResource",
   "dependencies": {
+    "@types/lodash": "^4.14.92",
     "aws-sdk": "^2.177.0",
     "graphql": "^0.12.3",
+    "lodash": "^4.17.4",
     "moment": "^2.20.1"
   },
   "devDependencies": {

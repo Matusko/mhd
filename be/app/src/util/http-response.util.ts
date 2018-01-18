@@ -1,5 +1,6 @@
 import {Response} from "../models/http/response";
 import {Message} from "../models/http/message";
+import * as _ from "lodash"
 /**
  * Created by matus on 8.1.2018.
  */
@@ -8,24 +9,23 @@ export class HttpResponseUtil {
 
     //TODO exact domains should not be in code
     //TODO is this right place for cors?
+
+   static readonly ALLOWED_ORIGINS: string[] = [
+       "http://cukan-bartko-mhd.s3-website-eu-west-1.amazonaws.com",
+       "http://localhost:4200"
+   ];
+
     static setRespHeaders(reqHeaders: any): any {
 
-        if(reqHeaders.origin == undefined || reqHeaders.origin == null) {
-            return {
-                "Access-Control-Allow-Origin": "*"
-            };
-        }
-
-        else if(reqHeaders.origin == "http://cukan-bartko-mhd.s3-website-eu-west-1.amazonaws.com" || reqHeaders.origin == "https://cukan-bartko-mhd.s3-website-eu-west-1.amazonaws.com") {
-
-            return {
-                "Access-Control-Allow-Origin": reqHeaders.origin
-            };
+        if(_.isNil(reqHeaders.origin) || _.indexOf(HttpResponseUtil.ALLOWED_ORIGINS, reqHeaders.origin) == -1) {
+            return {};
         }
 
         else {
 
-            return {};
+            return {
+                "Access-Control-Allow-Origin": reqHeaders.origin
+            };
         }
 
 
