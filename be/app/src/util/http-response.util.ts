@@ -17,14 +17,14 @@ export class HttpResponseUtil {
 
     static setRespHeaders(reqHeaders: any): any {
 
-        if(_.isNil(reqHeaders.origin) || _.indexOf(HttpResponseUtil.ALLOWED_ORIGINS, reqHeaders.origin) == -1) {
+        if(_.isNil(reqHeaders.Origin) || _.indexOf(HttpResponseUtil.ALLOWED_ORIGINS, reqHeaders.Origin) == -1) {
             return {};
         }
 
         else {
 
             return {
-                "Access-Control-Allow-Origin": reqHeaders.origin
+                "Access-Control-Allow-Origin": reqHeaders.Origin
             };
         }
 
