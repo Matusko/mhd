@@ -1,4 +1,8 @@
-<p-dataScroller [value]="displayableBuses" [lazy]="true">
+<div *ngIf="unknownStop">
+  <h2>NEPOZNAAAAM KRAJSIE SLOVAAAA A ANI TUTO ZASTAVKU</h2>
+</div>
+
+<p-dataScroller [value]="displayableBuses" [lazy]="true" *ngIf="displayableBuses && displayableBuses.length > 0">
   <ng-template let-bus pTemplate="item">
 
       <next-bus-item [nextBus]="bus"></next-bus-item>

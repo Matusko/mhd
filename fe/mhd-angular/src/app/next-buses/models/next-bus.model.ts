@@ -7,6 +7,7 @@ import {BusInfo} from "./bus-info.model";
 
 export interface NextBus {
   line: number;
+  direction: string;
   time: Moment;
   metaData?: BusInfo[];
 }

@@ -5,12 +5,14 @@
 import {Component, NgModule} from '@angular/core';
 import {NextBusesService} from "./next-buses.service";
 import {HttpClientModule} from "@angular/common/http";
+import { ActivatedRoute } from '@angular/router';
 import {DataScrollerModule} from 'primeng/primeng';
 import {NextBus} from "./models/next-bus.model";
 import {NextBusesItemModule} from "./next-bus-item/next-bus-item.component";
 import {Observable} from 'rxjs/Rx';
 import {DisplayableNextBus} from "./models/displayable-next-bus.model";
 import * as moment from "moment";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'next-buses',
@@ -20,17 +22,25 @@ import * as moment from "moment";
 export class NextBusesComponent {
   buses: NextBus[] = [];
   displayableBuses: DisplayableNextBus[] = [];
+  unknownStop: boolean = false;
 
-  constructor(private nextBusesService: NextBusesService) {
-    nextBusesService.getNextBuses("aaa").subscribe(
-      data => {
-        this.buses = data;
-        this.checkTime();
-      },
-      err => {
-        console.log(err)
-      }
-    )
+  constructor(private nextBusesService: NextBusesService, private route: ActivatedRoute) {
+
+    this.unknownStop = false;
+
+    this.route.params.subscribe(res => {
+      nextBusesService.getNextBuses(res.stopName).subscribe(
+        data => {
+          this.buses = data;
+          this.checkTime();
+        },
+        err => {
+          err.status === 404 ? this.unknownStop = true : console.log(err);
+        }
+      )
+    });
+
+
   }
 
   checkTime(): void {
@@ -51,6 +61,7 @@ export class NextBusesComponent {
       let displayableBus: DisplayableNextBus = {
         time: bus.time,
         line: bus.line,
+        direction: bus.direction,
         metaData: bus.metaData,
         remainingTime: moment(moment(bus.time).diff(now))
       };
@@ -78,7 +89,8 @@ export class NextBusesComponent {
   imports: [
     HttpClientModule,
     NextBusesItemModule,
-    DataScrollerModule
+    DataScrollerModule,
+    CommonModule
   ],
   exports: [
     NextBusesComponent

@@ -20,6 +20,7 @@ export class CalculateNextDaysBusesService {
             return {
                 line: line.lineNumber,
                 time: b,
+                direction: line.direction,
                 metaData: a.metaData
             };
         };
