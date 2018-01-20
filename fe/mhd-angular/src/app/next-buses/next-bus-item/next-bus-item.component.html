@@ -1,7 +1,25 @@
-<div class="bus-item">
-  <h2>Linka č. {{nextBus.line}}</h2>
-  <h5>Čas odjazdu: {{nextBus.time | nextBusTime}}</h5>
-  <h5>Ostáva {{nextBus.remainingTime | nextBusRemainingTime}}</h5>
+<div class="bus-item ui-grid-row">
+
+  <div class="ui-g-12 ui-md-4">
+    <h2>Linka č. {{nextBus.line}}</h2>
+  </div>
+  <div class="ui-g-12 ui-md-4">
+    <h2>Čas odjazdu: {{nextBus.time | nextBusTime}}</h2>
+  </div>
+  <div class="ui-g-12 ui-md-4">
+    <h2>Ostáva {{nextBus.remainingTime | nextBusRemainingTime}}</h2>
+  </div>
+
+  <p-accordion *ngIf="nextBus.metaData" class="ui-g-12" >
+    <p-accordionTab header="more info">
+      <div *ngFor="let info of nextBus.metaData">
+        <td>{{info.message}}</td>
+      </div>
+    </p-accordionTab>
+  </p-accordion>
+
 </div>
+
+
 
 

@@ -15,7 +15,6 @@ import * as moment from "moment";
 @Component({
   selector: 'next-buses',
   templateUrl: './next-buses.component.html',
-  styleUrls: ['next-buses.component.scss'],
   providers: [NextBusesService]
 })
 export class NextBusesComponent {
@@ -35,8 +34,9 @@ export class NextBusesComponent {
   }
 
   checkTime(): void {
+    this.getDisplayableBuses();
     Observable.interval(1000).subscribe(x => {
-      this.getDisplayableBuses();
+      this.updateDisplayableBuses();
     });
   }
 
@@ -57,6 +57,14 @@ export class NextBusesComponent {
 
       return displayableBus;
     })
+
+  }
+
+  updateDisplayableBuses(): void {
+
+    let now = moment();
+
+    this.displayableBuses.forEach(bus => bus.remainingTime = moment(moment(bus.time).diff(now)));
 
   }
 
