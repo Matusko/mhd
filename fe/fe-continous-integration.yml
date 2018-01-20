@@ -89,6 +89,7 @@ Resources:
       BucketName: cukan-bartko-mhd
       WebsiteConfiguration:
         IndexDocument: index.html
+        ErrorDocument: index.html
   PipelineBucket:
     Type: AWS::S3::Bucket
     DeletionPolicy: Delete
