@@ -16,7 +16,7 @@ export class NextBusesService {
 
   getNextBuses(stopName: string): Observable<NextBus[]> {
 
-    return this.http.get<NextBus[]>('https://p910250908.execute-api.eu-west-1.amazonaws.com/Prod/ScheduleResource?stop=Hasi%C4%8Dsk%C3%A1');
+    return this.http.get<NextBus[]>('https://777ep9iblj.execute-api.eu-west-1.amazonaws.com/Prod/ScheduleResource?stop=Hasi%C4%8Dsk%C3%A1');
   }
 
 }
