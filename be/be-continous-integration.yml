@@ -195,7 +195,7 @@ Resources:
                 type: zip
                 files:
                   - NewSamTemplate.yaml
-            - ProcessedTemplatesArtifactsStoreName: !GetAtt ProcessedTemplatesStoreBucket.name
+            - ProcessedTemplatesArtifactsStoreName: !Ref ProcessedTemplatesStoreBucket
 
         Type: CODEPIPELINE
 
